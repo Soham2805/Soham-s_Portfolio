@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Manrope:wght@600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-headline: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-label: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  --color-background: #0b1326;
+  --color-primary: #afc6ff;
+  --color-primary-container: #528dff;
+  --color-on-primary: #002d6d;
+  --color-on-primary-container: #00275f;
+  
+  --color-secondary: #b9c7df;
+  --color-secondary-container: #3c4a5e;
+  
+  --color-tertiary: #4edea3;
+  --color-tertiary-container: #00a572;
+  
+  --color-surface: #0b1326;
+  --color-surface-container-lowest: #060e20;
+  --color-surface-container-low: #131b2e;
+  --color-surface-container: #171f33;
+  --color-surface-container-high: #222a3d;
+  --color-surface-container-highest: #2d3449;
+  
+  --color-on-surface: #dae2fd;
+  --color-on-surface-variant: #c1c6d7;
+  --color-outline: #8b90a0;
+  --color-outline-variant: #414755;
+  
+  --color-error: #ffb4ab;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container;
+  }
+}
+
+.bg-hero-mesh {
+  background-color: #0b1326;
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(82, 141, 255, 0.15) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(78, 222, 163, 0.1) 0px, transparent 50%);
+}
+
+.editorial-shadow {
+  box-shadow: 0 20px 50px rgba(6, 14, 32, 0.5);
+}
+
+.glass-island {
+  background: rgba(23, 31, 51, 0.7);
+  backdrop-filter: blur(20px);
+}
