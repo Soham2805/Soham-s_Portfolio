@@ -46,6 +46,7 @@ interface Certificate {
   icon: any;
   color: string;
   image: string;
+  link?: string;
 }
 
 // --- Mock Data ---
@@ -73,7 +74,8 @@ const CERTIFICATES: Certificate[] = [
     year: '2024',
     icon: BadgeCheck,
     color: 'text-primary',
-    image: 'http://googleusercontent.com/profile/picture/6'
+    image: 'http://googleusercontent.com/profile/picture/6',
+    link: 'https://skillbuilder.aws/learn/FU5WCYVGKY/aws-cloud-quest-cloud-practitioner/JF9TKU68GT'
   },
   {
     id: '2',
@@ -83,7 +85,8 @@ const CERTIFICATES: Certificate[] = [
     year: '2025',
     icon: Terminal,
     color: 'text-tertiary',
-    image: 'http://googleusercontent.com/profile/picture/7'
+    image: 'http://googleusercontent.com/profile/picture/7',
+    link: 'https://spoken-tutorial.org/tutorial-search/?search_foss=Java&search_language=English'
   },
   {
     id: '3',
@@ -93,7 +96,30 @@ const CERTIFICATES: Certificate[] = [
     year: '2025',
     icon: BarChart3,
     color: 'text-primary-container',
-    image: 'http://googleusercontent.com/profile/picture/8'
+    image: 'http://googleusercontent.com/profile/picture/8',
+    link: 'https://skillbuilder.aws/learn/FU5WCYVGKY/aws-cloud-quest-cloud-practitioner/JF9TKU68GT'
+  },
+  {
+    id: '4',
+    title: 'Android Developer Virtual Internship',
+    organization: 'AICTE',
+    date: 'Aug 10',
+    year: '2024',
+    icon: ShieldCheck,
+    color: 'text-secondary',
+    image: 'http://googleusercontent.com/profile/picture/9',
+    link: 'https://eduskillsfoundation.org/'
+  },
+  {
+    id: '5',
+    title: 'Networking Basics',
+    organization: 'Cisco',
+    date: 'Oct 15',
+    year: '2025',
+    icon: Database,
+    color: 'text-primary',
+    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDoYO_Lui2G4EA3D8OGVApktGFej0rCfqHjvw319SzO-LqObzh2dh_YrTbkVnHDTMDOJKp8nItzc0XzQMS6R7F7gAhRzG52JBrp9Iys3oq_VR_LGanaU0odKNkl7n9wUZXSETq9lM75mm52PFNkL6YOGHWUyAF4DNZv9S_UIwBF3_AQMDjPohnJQszSf6G1tVMeZYKTvpfanCISZPC1AeNrBZaqYiG0Jt8mufOqYdCVKYn8NTjwbpHvfi2b8AoOjPZNSj_DoUSEo-AH0',
+    link: 'https://www.cisco.com/'
   }
 ];
 
@@ -133,7 +159,7 @@ const Footer = () => (
     <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 w-full py-12 px-8">
       <div className="flex flex-col items-center md:items-start gap-2">
         <span className="text-lg font-black text-slate-200 font-headline uppercase tracking-widest">SOHAM PHULARE</span>
-        <span className="font-body text-sm text-slate-500">© 2024. All rights reserved.</span>
+        <span className="font-body text-sm text-slate-500">© 2026. All rights reserved.</span>
       </div>
       <div className="flex items-center gap-10">
         <a href="https://www.linkedin.com/in/soham-phulare-3a14122a2?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-primary transition-colors"><Linkedin size={20} /></a>
@@ -357,46 +383,19 @@ const CertificatesScreen = () => (
               <div className="text-xs text-on-surface-variant font-label">
                 Issued: <span className="text-on-surface">{cert.date}</span>
               </div>
-              <button className="flex items-center gap-2 text-primary font-label text-xs font-bold uppercase tracking-widest group/btn">
+              <a 
+                href={cert.link || '#'} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="flex items-center gap-2 text-primary font-label text-xs font-bold uppercase tracking-widest group/btn"
+              >
                 View Course
                 <ArrowRight size={14} className="group-hover/btn:translate-x-1 transition-transform" />
-              </button>
+              </a>
             </div>
           </div>
         </article>
       ))}
-
-      <article className="group bg-surface-container-low rounded-xl p-8 border border-primary/10 hover:border-primary/30 transition-all duration-300 flex flex-col justify-between aspect-[4/3] md:col-span-2 relative overflow-hidden">
-        <div className="absolute -bottom-10 -right-10 w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
-        <div className="relative z-10 flex flex-col md:flex-row gap-8 h-full">
-          <div className="flex-1 flex flex-col justify-between">
-            <div>
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 bg-primary/20 flex items-center justify-center rounded-full">
-                  <Star className="text-primary" size={18} />
-                </div>
-                <span className="text-primary font-label text-xs font-extrabold tracking-widest uppercase">Specialization</span>
-              </div>
-              <h3 className="text-3xl font-headline font-extrabold text-on-surface leading-tight mb-4 max-w-md">Cloud Architecture Mastery</h3>
-              <p className="text-on-surface-variant text-sm font-body leading-relaxed mb-6">Comprehensive curriculum covering Scalability, Security, and Serverless through intensive hands-on training.</p>
-            </div>
-            <div className="flex items-center gap-6">
-              <button className="bg-primary text-on-primary px-6 py-2.5 rounded-full font-label font-bold text-xs uppercase tracking-widest hover:scale-105 transition-transform active:scale-95">Verify Credential</button>
-              <span className="text-xs text-on-surface-variant font-label uppercase tracking-tighter">Cloud Institute</span>
-            </div>
-          </div>
-          <div className="hidden md:block w-48 h-full relative">
-            <div className="absolute inset-0 bg-surface-container-high rounded-xl overflow-hidden shadow-2xl border border-outline-variant/10">
-              <img 
-                alt="Certificate Preview" 
-                className="w-full h-full object-cover opacity-60 grayscale hover:grayscale-0 transition-all duration-500" 
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlV7YG2dqmIHwypA3gaY8nDPuj6JDQ6ybOqTOJwput3SegRIUI_205PAJOAWpUkKjrv2dXqPnvXyZdaxVzwAHWNvK8mb5p7MfQT5Q8ygXAmvq9Rn5zC9fpZUFIGNliQTI1m5CrmfhLTovqO0eczwB-kTXlTTYJpbfAmi0pGmsw7HXoeTqjg-Dley5CLpxUoiM6Laan-hhfR4m0n-0GAjN3IjqG6ricFDM-XHe7OlqjjixNKXETtnbjqC9lLH8edmX698ucQ7kyyeoe"
-                referrerPolicy="no-referrer"
-              />
-            </div>
-          </div>
-        </div>
-      </article>
     </section>
 
     <section className="mt-32 p-12 bg-surface-container-low rounded-3xl flex flex-col md:flex-row items-center justify-around gap-12 text-center">
