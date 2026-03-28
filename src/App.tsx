@@ -18,8 +18,7 @@ import {
   Star,
   Database,
   Github,
-  Linkedin,
-  Dribbble
+  Linkedin
 } from 'lucide-react';
 
 // --- Types ---
@@ -35,6 +34,7 @@ interface Project {
   category: string;
   year: string;
   featured?: boolean;
+  repoLink?: string;
 }
 
 interface Certificate {
@@ -45,6 +45,7 @@ interface Certificate {
   year: string;
   icon: any;
   color: string;
+  image: string;
 }
 
 // --- Mock Data ---
@@ -58,7 +59,8 @@ const PROJECTS: Project[] = [
     tags: ['Python', 'Django'],
     category: 'Power Solution',
     year: '2025',
-    featured: true
+    featured: true,
+    repoLink: 'https://github.com/Soham2805/VoltVerge'
   },
 ];
 
@@ -70,7 +72,8 @@ const CERTIFICATES: Certificate[] = [
     date: 'Dec 12',
     year: '2024',
     icon: BadgeCheck,
-    color: 'text-primary'
+    color: 'text-primary',
+    image: 'http://googleusercontent.com/profile/picture/6'
   },
   {
     id: '2',
@@ -79,7 +82,8 @@ const CERTIFICATES: Certificate[] = [
     date: 'June 05',
     year: '2025',
     icon: Terminal,
-    color: 'text-tertiary'
+    color: 'text-tertiary',
+    image: 'http://googleusercontent.com/profile/picture/7'
   },
   {
     id: '3',
@@ -88,7 +92,8 @@ const CERTIFICATES: Certificate[] = [
     date: 'Nov 22',
     year: '2025',
     icon: BarChart3,
-    color: 'text-primary-container'
+    color: 'text-primary-container',
+    image: 'http://googleusercontent.com/profile/picture/8'
   }
 ];
 
@@ -97,7 +102,7 @@ const CERTIFICATES: Certificate[] = [
 const Navbar = ({ activeScreen, setScreen }: { activeScreen: Screen, setScreen: (s: Screen) => void }) => (
   <nav className="fixed top-0 left-0 right-0 z-50 flex justify-center items-center">
     <div className="bg-slate-900/70 backdrop-blur-xl rounded-full mt-10 mx-auto w-max px-6 py-3 shadow-2xl shadow-slate-950/50 flex items-center gap-8">
-      <div className="text-xl font-bold tracking-tighter text-slate-100 font-headline">CURATOR</div>
+      <div className="text-xl font-bold tracking-tighter text-slate-100 font-headline uppercase">Soham Phulare</div>
       <div className="hidden md:flex items-center gap-6 font-manrope tracking-tight font-bold">
         {(['home', 'projects', 'certificates', 'contact'] as Screen[]).map((s) => (
           <button
@@ -111,9 +116,14 @@ const Navbar = ({ activeScreen, setScreen }: { activeScreen: Screen, setScreen: 
           </button>
         ))}
       </div>
-      <button className="bg-gradient-to-br from-primary to-primary-container text-on-primary-container px-5 py-1.5 rounded-full font-bold text-sm hover:scale-105 transition-transform duration-200 active:scale-95">
-        Hire Me
-      </button>
+      <a 
+        href="https://drive.google.com/file/d/1eO6ll_FhQc90ThC27CRaH36VaaCpMGxx/view?usp=drive_link" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        className="bg-gradient-to-br from-primary to-primary-container text-on-primary-container px-5 py-1.5 rounded-full font-bold text-sm hover:scale-105 transition-transform duration-200 active:scale-95"
+      >
+        Resume
+      </a>
     </div>
   </nav>
 );
@@ -122,13 +132,12 @@ const Footer = () => (
   <footer className="bg-slate-950 border-t border-outline-variant/5">
     <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 w-full py-12 px-8">
       <div className="flex flex-col items-center md:items-start gap-2">
-        <span className="text-lg font-black text-slate-200 font-headline uppercase tracking-widest">THE CURATOR</span>
+        <span className="text-lg font-black text-slate-200 font-headline uppercase tracking-widest">SOHAM PHULARE</span>
         <span className="font-body text-sm text-slate-500">© 2024. All rights reserved.</span>
       </div>
       <div className="flex items-center gap-10">
-        <a href="#" className="text-slate-500 hover:text-primary transition-colors"><Linkedin size={20} /></a>
-        <a href="#" className="text-slate-500 hover:text-primary transition-colors"><Github size={20} /></a>
-        <a href="#" className="text-slate-500 hover:text-primary transition-colors"><Dribbble size={20} /></a>
+        <a href="https://www.linkedin.com/in/soham-phulare-3a14122a2?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-primary transition-colors"><Linkedin size={20} /></a>
+        <a href="https://github.com/Soham2805" target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-primary transition-colors"><Github size={20} /></a>
       </div>
     </div>
   </footer>
@@ -177,6 +186,7 @@ const HomeScreen = ({ setScreen }: { setScreen: (s: Screen) => void }) => (
         </div>
         <div className="flex items-center gap-12 mt-4">
           {[
+            // Add your stats here, e.g., { label: 'Projects', value: '10+' }
           ].map((stat) => (
             <div key={stat.label} className="flex flex-col">
               <span className="text-3xl font-headline font-extrabold text-on-surface">{stat.value}</span>
@@ -279,9 +289,15 @@ const ProjectsScreen = () => (
                 <span className="text-primary font-label text-xs tracking-widest uppercase">{project.year}</span>
               </div>
             </div>
-            <button className="flex items-center gap-2 text-primary font-label text-md uppercase tracking-widest group-hover:gap-4 transition-all duration-300">
-              View Project <ArrowRight size={18} />
-            </button>
+            {project.repoLink ? (
+              <a href={project.repoLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-primary font-label text-md uppercase tracking-widest group-hover:gap-4 transition-all duration-300">
+                View Code <ArrowRight size={18} />
+              </a>
+            ) : (
+              <button className="flex items-center gap-2 text-primary font-label text-md uppercase tracking-widest group-hover:gap-4 transition-all duration-300">
+                View Project <ArrowRight size={18} />
+              </button>
+            )}
           </div>
         </div>
       ))}
@@ -314,27 +330,38 @@ const CertificatesScreen = () => (
       {CERTIFICATES.map((cert) => (
         <article 
           key={cert.id}
-          className="group bg-surface-container-high rounded-xl p-8 hover:bg-surface-container-highest transition-all duration-300 flex flex-col justify-between aspect-[4/3] relative overflow-hidden"
+          className="group bg-surface-container-high rounded-xl overflow-hidden hover:bg-surface-container-highest transition-all duration-300 flex flex-col relative"
         >
-          <div className={`absolute top-0 right-0 w-32 h-32 opacity-5 rounded-bl-full -mr-10 -mt-10 transition-transform group-hover:scale-110 bg-current ${cert.color}`}></div>
-          <div className="relative z-10">
-            <div className="flex justify-between items-start mb-6">
-              <div className="w-12 h-12 bg-surface-container-lowest flex items-center justify-center rounded-lg">
-                <cert.icon className={`${cert.color}`} size={30} />
-              </div>
-              <span className="bg-surface-container-highest px-3 py-1 rounded-sm text-[10px] font-bold tracking-widest text-secondary uppercase">{cert.year}</span>
-            </div>
-            <h3 className="text-2xl font-headline font-bold text-on-surface leading-snug mb-2">{cert.title}</h3>
-            <p className={`${cert.color} text-sm font-label font-medium mb-4`}>{cert.organization}</p>
+          <div className="w-full h-48 overflow-hidden relative">
+            <div className={`absolute inset-0 opacity-20 mix-blend-overlay z-10 bg-current ${cert.color}`}></div>
+            <img 
+              src={cert.image} 
+              alt={cert.title} 
+              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              referrerPolicy="no-referrer"
+            />
           </div>
-          <div className="flex items-center justify-between mt-auto">
-            <div className="text-xs text-on-surface-variant font-label">
-              Issued: <span className="text-on-surface">{cert.date}</span>
+          
+          <div className="p-6 flex flex-col justify-between flex-grow relative z-10">
+            <div>
+              <div className="flex justify-between items-start mb-4">
+                <div className="w-10 h-10 bg-surface-container-lowest flex items-center justify-center rounded-lg shadow-sm">
+                  <cert.icon className={`${cert.color}`} size={24} />
+                </div>
+                <span className="bg-surface-container-highest px-3 py-1 rounded-sm text-[10px] font-bold tracking-widest text-secondary uppercase">{cert.year}</span>
+              </div>
+              <h3 className="text-xl font-headline font-bold text-on-surface leading-snug mb-2">{cert.title}</h3>
+              <p className={`${cert.color} text-sm font-label font-medium mb-4`}>{cert.organization}</p>
             </div>
-            <button className="flex items-center gap-2 text-primary font-label text-xs font-bold uppercase tracking-widest group/btn">
-              View Course
-              <ArrowRight size={14} className="group-hover/btn:translate-x-1 transition-transform" />
-            </button>
+            <div className="flex items-center justify-between mt-auto pt-4 border-t border-outline-variant/10">
+              <div className="text-xs text-on-surface-variant font-label">
+                Issued: <span className="text-on-surface">{cert.date}</span>
+              </div>
+              <button className="flex items-center gap-2 text-primary font-label text-xs font-bold uppercase tracking-widest group/btn">
+                View Course
+                <ArrowRight size={14} className="group-hover/btn:translate-x-1 transition-transform" />
+              </button>
+            </div>
           </div>
         </article>
       ))}
@@ -461,9 +488,8 @@ const ContactScreen = () => (
               </div>
               <div className="flex flex-col md:flex-row items-center justify-between gap-6 pt-4">
                 <div className="flex items-center gap-4">
-                  <a href="#" className="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface-variant hover:text-primary hover:scale-110 transition-all"><Linkedin size={20} /></a>
-                  <a href="#" className="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface-variant hover:text-primary hover:scale-110 transition-all"><Github size={20} /></a>
-                  <a href="#" className="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface-variant hover:text-primary hover:scale-110 transition-all"><Dribbble size={20} /></a>
+                  <a href="https://www.linkedin.com/in/soham-phulare-3a14122a2?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface-variant hover:text-primary hover:scale-110 transition-all"><Linkedin size={20} /></a>
+                  <a href="https://github.com/Soham2805" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface-variant hover:text-primary hover:scale-110 transition-all"><Github size={20} /></a>
                 </div>
                 <button className="bg-gradient-to-br from-primary to-primary-container text-on-primary w-full md:w-auto px-10 py-4 rounded-full font-bold tracking-tight hover:scale-[1.03] active:scale-95 transition-all shadow-xl shadow-primary/20 flex items-center justify-center gap-2 group">
                   Send Message
